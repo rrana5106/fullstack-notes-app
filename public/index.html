@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- character encoding -->
+    <meta charset="UTF-8" />
+
+    <!-- make the page responsive on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+
+    <!-- Google Font: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- custom stylesheet -->
+    <link rel="stylesheet" href="./style.css" />
+
+    <!-- page title -->
+    <title>Todo List App</title>
+  </head>
+
+  <body>
+    <!-- page header -->
+    <header class="py-3 mb-3">
+      <h1 class="text-center title">To Do List App</h1>
+    </header>
+
+    <!-- main content section -->
+    <main>
+      <!-- dashboard layout -->
+      <div
+        style="grid-template-columns: 1fr 3fr"
+        class="d-grid gap-0 column-gap-3"
+      >
+
+        <!-- sidebar section -->
+        <div class="p-2 sidebar rounded-end">
+          <h2 class="text-center">Sidebar</h2>
+
+          <div class="container">
+            <div class="list-group">
+              <ul>
+
+                <!-- dashboard menu item -->
+                <li class="mb-2">
+                  <i class="bi bi-speedometer"></i>
+                  <span class="sidebar-text">Dashboard</span>
+                </li>
+
+                <!-- vital task menu item -->
+                <li class="mb-2">
+                  <i class="bi bi-exclamation-lg"></i>
+                  <span class="sidebar-text">Vital Task</span>
+                </li>
+
+                <!-- my task menu item -->
+                <li class="mb-2">
+                  <i class="bi bi-list-task"></i>
+                  <span class="sidebar-text">My Task</span>
+                </li>
+
+                <!-- settings menu item -->
+                <li class="mb-2">
+                  <i class="bi bi-gear"></i>
+                  <span class="sidebar-text">Setting</span>
+                </li>
+
+                <!-- help menu item -->
+                <li class="mb-2">
+                  <i class="bi bi-question-lg"></i>
+                  <span class="sidebar-text">Help</span>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- main dashboard content -->
+        <div class="p-2 main-content border rounded-start">
+          <div class="container">
+
+            <!-- section heading -->
+            <h2 class="text-center">Dashboard Overview</h2>
+
+            <!-- todo form -->
+            <form>
+              <div class="mb-3">
+
+                <!-- input label -->
+                <label for="inputText" class="form-label container-fluid">
+                  To Do List:
+                </label>
+
+                <!-- task input field -->
+                <input
+                  type="text"
+                  class="form-control userInput"
+                  id="inputText"
+                />
+
+                <!-- add task button -->
+                <div class="d-flex justify-content-center mt-2">
+                  <button type="button" class="btn btn-primary">
+                    Add
+                  </button>
+                </div>
+
+              </div>
+
+              <!-- task list container -->
+              <div class="container-fluid mt-4">
+                <div class="card">
+
+                  <!-- tasks will be added here dynamically using JavaScript -->
+                  <ul class="card-body task-list"></ul>
+
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- footer section -->
+    <footer></footer>
+
+    <!-- Bootstrap JavaScript -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- custom JavaScript -->
+    <script src="./script.js"></script>
+  </body>
+</html>

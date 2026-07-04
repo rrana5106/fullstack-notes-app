@@ -1,6 +1,9 @@
 // Import the Express module
 const express = require("express");
 
+// Import the Path module
+const path = require("path")
+
 // Create an instance of an Express application
 const app = express();
 
@@ -9,6 +12,9 @@ const PORT = 3001;
 
 // Middleware to parse incoming JSON requests
 app.use(express.json());
+
+// // Serve all files from the "public" folder (HTML, CSS, JS)
+app.use(express.static(path.join(__dirname, "public")));
 
 // Handle GET request at the root route
 app.get("/", (req, res) => {

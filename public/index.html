@@ -33,13 +33,13 @@
     <link rel="stylesheet" href="./style.css" />
 
     <!-- page title -->
-    <title>Todo List App</title>
+    <title>NoteStack</title>
   </head>
 
   <body>
     <!-- page header -->
     <header class="py-3 mb-3">
-      <h1 class="text-center title">To Do List App</h1>
+      <h1 class="text-center title">NoteStack</h1>
     </header>
 
     <!-- main content section -->
@@ -49,7 +49,6 @@
         style="grid-template-columns: 1fr 3fr"
         class="d-grid gap-0 column-gap-3"
       >
-
         <!-- sidebar section -->
         <div class="p-2 sidebar rounded-end">
           <h2 class="text-center">Sidebar</h2>
@@ -57,37 +56,46 @@
           <div class="container">
             <div class="list-group">
               <ul>
-
                 <!-- dashboard menu item -->
                 <li class="mb-2">
                   <i class="bi bi-speedometer"></i>
-                  <span class="sidebar-text">Dashboard</span>
+                  <a href="#">
+                    <span class="sidebar-text">Dashboard</span>
+                  </a>
                 </li>
 
                 <!-- vital task menu item -->
                 <li class="mb-2">
                   <i class="bi bi-exclamation-lg"></i>
-                  <span class="sidebar-text">Vital Task</span>
+                  <a href="#">
+                    <span class="sidebar-text">Vital Task</span>
+                  </a>
                 </li>
 
                 <!-- my task menu item -->
                 <li class="mb-2">
                   <i class="bi bi-list-task"></i>
-                  <span class="sidebar-text">My Task</span>
+
+                  <a href="#">
+                    <span class="sidebar-text">My Task</span>
+                  </a>
                 </li>
 
                 <!-- settings menu item -->
                 <li class="mb-2">
                   <i class="bi bi-gear"></i>
-                  <span class="sidebar-text">Setting</span>
+                  <a href="#">
+                    <span class="sidebar-text">Setting</span>
+                  </a>
                 </li>
 
                 <!-- help menu item -->
                 <li class="mb-2">
                   <i class="bi bi-question-lg"></i>
-                  <span class="sidebar-text">Help</span>
+                  <a href="#">
+                    <span class="sidebar-text">Help</span>
+                  </a>
                 </li>
-
               </ul>
             </div>
           </div>
@@ -96,14 +104,12 @@
         <!-- main dashboard content -->
         <div class="p-2 main-content border rounded-start">
           <div class="container">
-
             <!-- section heading -->
             <h2 class="text-center">Dashboard Overview</h2>
 
             <!-- todo form -->
             <form>
               <div class="mb-3">
-
                 <!-- input label -->
                 <label for="inputText" class="form-label container-fluid">
                   To Do List:
@@ -118,27 +124,20 @@
 
                 <!-- add task button -->
                 <div class="d-flex justify-content-center mt-2">
-                  <button type="button" class="btn btn-primary">
-                    Add
-                  </button>
+                  <button type="button" class="btn btn-primary">Add</button>
                 </div>
-
               </div>
 
-              <!-- task list container -->
+              <!-- task list -->
               <div class="container-fluid mt-4">
                 <div class="card">
-
-                  <!-- tasks will be added here dynamically using JavaScript -->
+                  <!-- tasks will appear here -->
                   <ul class="card-body task-list"></ul>
-
                 </div>
               </div>
             </form>
-
           </div>
         </div>
-
       </div>
     </main>
 

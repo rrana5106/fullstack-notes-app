@@ -5,7 +5,7 @@
   padding: 0;
 }
 
-/* apply Inter font to the whole page */
+/* set the font for the page */
 body {
   font-family: "Inter", sans-serif;
 }
@@ -47,9 +47,16 @@ header {
   gap: 10px;
 }
 
+/* sidebar items */
+.sidebar li > a {
+  text-decoration: none;
+  color: white;
+}
 /* show pointer when hovering over sidebar items */
-.sidebar li:hover {
+.sidebar li:hover,
+.sidebar li > a:hover {
   cursor: pointer;
+  color: #22c55e;
 }
 
 /* display sidebar text on desktop */
@@ -81,7 +88,7 @@ h3 {
   display: inline;
 }
 
-/* mobile responsive styles */
+/* styles for smaller screens */
 @media (max-width: 768px) {
   /* make sidebar smaller and keep content area larger */
   main > div {

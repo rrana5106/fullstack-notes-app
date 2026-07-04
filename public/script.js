@@ -1,12 +1,12 @@
-// getting the elements from the page
+// select page elements
 const taskList = document.querySelector(".task-list");
 const btnEl = document.querySelector(".btn");
 const inputEl = document.querySelector(".userInput");
 
-// storing all tasks in an array
+// array to store tasks
 const tasks = [];
 
-// listening for button clicks
+// add task when button is clicked
 btnEl.addEventListener("click", addTask);
 
 // allow users to add a task by pressing Enter
@@ -37,7 +37,7 @@ function addTask() {
   // adding the task to the array
   tasks.push(task);
 
-  // displaying the task on the page
+  // show the task on the page
   createTask(task);
 
   // clearing the input field
@@ -114,7 +114,7 @@ function createTask(task) {
   buttonGroup.appendChild(editBtn);
   buttonGroup.appendChild(deleteBtn);
 
-  // keeping track if the task is being edited
+  // check if this task is currently being edited
   let isEditing = false;
 
   // handle editing and saving a task

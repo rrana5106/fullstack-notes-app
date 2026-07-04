@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/rrana5106/fullstack-notes-app/issues"
   },
-  "homepage": "https://github.com/rrana5106/fullstack-notes-app#readme"
+  "homepage": "https://github.com/rrana5106/fullstack-notes-app#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
 }

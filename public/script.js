@@ -1,79 +1,87 @@
-// Run the JavaScript after the HTML page has fully loaded
+// Run the code after the page loads
 document.addEventListener("DOMContentLoaded", () => {
-  // select page elements
+  // Get the input elements
   const taskList = document.querySelector(".task-list");
   const btnEl = document.querySelector(".btn");
   const inputEl = document.querySelector(".userInput");
 
-  /* 
-  // array to store tasks
-  const tasks = [];
-  
-  // add task when button is clicked
-  btnEl.addEventListener("click", addTask);
-  */
-
-  // load notes when the page opens
+  // Load all notes
   getNotes();
 
-   // add note when button is clicked
+  // Add a note when the button is clicked
   btnEl.addEventListener("click", addNote);
 
-  // allow users to add a task by pressing Enter
+  // Add a note when Enter is pressed
   inputEl.addEventListener("keydown", function (e) {
     if (e.key === "Enter") {
       e.preventDefault();
-      // addTask();
-      addNote()
+      addNote();
     }
   });
 
-  // function to add a new task
-  function addTask() {
-    // getting the value from the input field
+  // Get all notes from the server
+  async function getNotes() {
+    const response = await fetch("/data");
+    const notes = await response.json();
+
+    // Clear the list
+    taskList.innerHTML = "";
+
+    // Show each note
+    notes.forEach((note) => {
+      createNote(note);
+    });
+  }
+
+  // Add a new note
+  async function addNote() {
+    // Get the note from the input
     const task = inputEl.value.trim();
 
-    // checking if the input is empty
+    // Check if the input is empty
     if (task === "") {
-      alert("Please enter a task");
+      alert("Please enter a note");
       return;
     }
 
-    // checking if the task already exists
-    if (tasks.includes(task)) {
-      alert("Task already exists");
-      return;
-    }
+    // Send the note to the server
+    const response = await fetch("/data", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ text: task }),
+    });
 
-    // adding the task to the array
-    tasks.push(task);
+    // Get the saved note
+    const result = await response.json();
 
-    // show the task on the page
-    createTask(task);
+    // Show the new note
+    createNote(result.data);
 
-    // clearing the input field
+    // Clear the input
     inputEl.value = "";
   }
 
-  // function to create and display a task
-  function createTask(task) {
-    // keeping track of the current task name
-    let currentTask = task;
+  // Create and display a note
+  function createNote(note) {
+    // Save the current note
+    let currentTask = note.text;
 
-    // creating new elements
+    // Create the HTML elements
     const liEl = document.createElement("li");
     const taskText = document.createElement("span");
     const editBtn = document.createElement("button");
     const deleteBtn = document.createElement("button");
 
-    // prevent buttons from submitting the form
+    // Prevent the buttons from submitting the form
     editBtn.type = "button";
     deleteBtn.type = "button";
 
-    // displaying task text
+    // Show the note text
     taskText.textContent = currentTask;
 
-    // styling the task item
+    // Add Bootstrap classes
     liEl.classList.add(
       "task-item",
       "d-flex",
@@ -82,129 +90,103 @@ document.addEventListener("DOMContentLoaded", () => {
       "mb-2",
       "border",
       "p-2",
-      "rounded",
+      "rounded"
     );
 
-    // creating edit button text
+    // Create the Edit button
     const editText = document.createElement("span");
     editText.textContent = "Edit";
     editText.className = "edit-text";
 
-    // creating edit icon
     const editIcon = document.createElement("i");
     editIcon.className = "bi bi-pencil-square edit-icon";
 
-    // styling edit button
     editBtn.classList.add("btn", "btn-warning", "btn-sm");
-
-    // adding text and icon to edit button
     editBtn.append(editText, editIcon);
 
-    // creating delete button text
+    // Create the Delete button
     const deleteText = document.createElement("span");
     deleteText.textContent = "Delete";
     deleteText.className = "delete-text";
 
-    // creating delete icon
     const deleteIcon = document.createElement("i");
     deleteIcon.className = "bi bi-trash delete-icon";
 
-    // styling delete button
     deleteBtn.classList.add("btn", "btn-danger", "btn-sm");
-
-    // adding text and icon to delete button
     deleteBtn.append(deleteText, deleteIcon);
 
-    // creating a container for the action buttons
+    // Create a button container
     const buttonGroup = document.createElement("div");
-
-    // keeping edit and delete buttons next to each other
     buttonGroup.classList.add("d-flex", "align-items-center", "gap-2");
 
-    // adding buttons to the container
+    // Add the buttons
     buttonGroup.appendChild(editBtn);
     buttonGroup.appendChild(deleteBtn);
 
-    // check if this task is currently being edited
+    // Check if the note is being edited
     let isEditing = false;
 
-    // handle editing and saving a task
-    editBtn.addEventListener("click", function () {
-      // switch to edit mode when the edit button is clicked
+    // Edit or save the note
+    editBtn.addEventListener("click", async function () {
+      // Switch to edit mode
       if (!isEditing) {
-        // make the task text editable
         taskText.contentEditable = true;
-
-        // place the cursor inside the task text
         taskText.focus();
 
-        // change button text to save
         editBtn.textContent = "Save";
-
-        // update editing status
         isEditing = true;
       } else {
-        // get the updated task text and remove extra spaces
+        // Get the updated note
         const newTask = taskText.textContent.trim();
 
-        // check if the edited task is empty
+        // Check if the note is empty
         if (newTask === "") {
-          alert("Task cannot be empty");
-
-          // restore the original task text
+          alert("Note cannot be empty");
           taskText.textContent = currentTask;
           return;
         }
 
-        // check if another task with the same name already exists
-        if (tasks.includes(newTask) && newTask !== currentTask) {
-          alert("Task already exists");
+        // Send the updated note to the server
+        const response = await fetch(`/data/${note.id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ text: newTask }),
+        });
 
-          // restore the original task text
-          taskText.textContent = currentTask;
-          return;
-        }
+        // Get the updated note
+        const result = await response.json();
 
-        // find the task in the array
-        const taskIndex = tasks.indexOf(currentTask);
-
-        // update the task in the array
-        tasks[taskIndex] = newTask;
-
-        // save the updated task name
-        currentTask = newTask;
-
-        // disable editing mode
+        // Update the note
+        currentTask = result.data.text;
+        taskText.textContent = currentTask;
         taskText.contentEditable = false;
 
-        // restore the edit button icon
+        // Stop editing
         editBtn.textContent = "";
         editBtn.append(editText, editIcon);
 
-        // update editing status
         isEditing = false;
       }
     });
 
-    // deleting a task
-    deleteBtn.addEventListener("click", function () {
-      // remove task from page
+    // Delete a note
+    deleteBtn.addEventListener("click", async function () {
+      // Send the delete request
+      await fetch(`/data/${note.id}`, {
+        method: "DELETE",
+      });
+
+      // Remove the note
       liEl.remove();
-
-      // find task position in array
-      const taskIndex = tasks.indexOf(currentTask);
-
-      // remove task from array
-      tasks.splice(taskIndex, 1);
     });
 
-    // adding task text to the list item
+    // Add the note and buttons
     liEl.appendChild(taskText);
-
-    // adding the button container
     liEl.appendChild(buttonGroup);
 
-    // displaying the task on the page
+    // Show the note
     taskList.appendChild(liEl);
   }
 });

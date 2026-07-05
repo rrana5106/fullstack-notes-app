@@ -26,17 +26,24 @@ app.use(express.static(path.join(__dirname, "public")));
 const dataFilePath = path.join(__dirname, "data.json");
 
 // Read notes from the JSON file
+// Function to read data from the JSON file
 const readData = () => {
   // Return an empty array if the file doesn't exist
   if (!fs.existsSync(dataFilePath)) {
     return [];
   }
 
-  // Read and convert the JSON data into a JavaScript object
-  const data = fs.readFileSync(dataFilePath);
+  // Read the file
+  const data = fs.readFileSync(dataFilePath, "utf8");
+
+  // Return an empty array if the file is empty
+  if (data.trim() === "") {
+    return [];
+  }
+
+  // Convert the JSON data into a JavaScript object
   return JSON.parse(data);
 };
-
 // Save notes to the JSON file
 const writeData = (data) => {
   fs.writeFileSync(dataFilePath, JSON.stringify(data, null, 2));

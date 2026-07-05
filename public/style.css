@@ -20,7 +20,7 @@ header {
 .sidebar {
   background: #1e293b;
   color: white;
-  height: 80vh;
+  min-height: 80vh;
 }
 
 /* card styling */
@@ -32,6 +32,23 @@ header {
 .btn-primary {
   background: #22c55e;
   border: none;
+  transition: background 0.3s ease;
+}
+
+/* change button color when hovering */
+.btn-primary:hover {
+  background: #16a34a;
+}
+
+/* remove spacing from the task list */
+.task-list {
+  padding-left: 0;
+}
+
+/* make long notes wrap properly */
+.task-item span {
+  flex: 1;
+  word-break: break-word;
 }
 
 /* remove bullets from sidebar items and task items */
@@ -73,7 +90,8 @@ h3 {
 
 /* center task content */
 .task-item {
-  text-align: center;
+  text-align: left;
+  margin-bottom: 10px;
 }
 
 /* hide edit and delete text on desktop */
@@ -88,6 +106,12 @@ h3 {
   display: inline;
 }
 
+/* change input border when selected */
+.userInput:focus {
+  box-shadow: none;
+  border-color: #22c55e;
+}
+
 /* styles for smaller screens */
 @media (max-width: 768px) {
   /* make sidebar smaller and keep content area larger */
@@ -98,7 +122,7 @@ h3 {
 
   /* keep sidebar full height on mobile */
   .sidebar {
-    height: 80vh;
+    min-height: 80vh;
     margin-bottom: 0;
   }
 

@@ -87,7 +87,6 @@ document.addEventListener("DOMContentLoaded", () => {
       "d-flex",
       "justify-content-between",
       "align-items-center",
-      "mb-2",
       "border",
       "p-3",
       "rounded"

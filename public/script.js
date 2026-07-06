@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "align-items-center",
       "mb-2",
       "border",
-      "p-2",
+      "p-3",
       "rounded"
     );
 
